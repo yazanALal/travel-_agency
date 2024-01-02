@@ -18,7 +18,7 @@ class ticket extends Model
         'city_id' => 'integer',
         'company_id' => 'integer',
         'date_s' => 'date',
-        'date_e' => 'date0',
+        'date_e' => 'date',
     ];
 
     public function company(): object

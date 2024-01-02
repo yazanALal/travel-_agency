@@ -83,10 +83,11 @@ class CompanyController extends Controller
      * @param  \App\Models\company  $company
      * @return \Illuminate\Http\Response
      */
-    public function show(company $company, $id)
+    public function Fshow(company $company, $id)
     {
         //
         $company = Company::find($id);
+        
         return view('auth.company.show', ['company' => $company]);
     }
 
