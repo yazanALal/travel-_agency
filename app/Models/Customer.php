@@ -10,7 +10,8 @@ class Customer extends Model
     use HasFactory;
 
     protected $fillable = [
-        "name",
+
+        'name',
         'email',
         'gender',
         'phone',
@@ -23,5 +24,14 @@ class Customer extends Model
         'phone' => 'string',
     ];
 
-    
+
+
+    public function Reviews():object{
+        return $this->hasMany(Review::class);
+    }
+
+    public function Bookings():object{
+        return $this->hasMany(Booking::class);
+    }
+
 }
