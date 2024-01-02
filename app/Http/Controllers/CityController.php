@@ -76,8 +76,8 @@ class CityController extends Controller
      */
     public function edit(City $city, $id)
     {
-        $cities = City::all();
-        return view('admins.cities.update', ['cities' => $cities]);
+        $city = City::find($id);
+        return view('admins.cities.update', ['city' => $city]);
     }
 
     /**
@@ -93,6 +93,7 @@ class CityController extends Controller
         $validateCity = Validator::make(
             $request->all(),
             [
+                'id'=>"integer|exists:cities,id",
                 'name' => "required|string",
                 'country' => "required|string",
             ]

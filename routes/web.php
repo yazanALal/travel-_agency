@@ -53,10 +53,10 @@ Route::prefix('admins')->middleware('auth')->group(function () {
 
     Route::get('/customers', [\App\Http\Controllers\CustomerController::class, 'index'])
         ->name('admins.customers.index');
-        
+
     Route::get('/customers/create', [\App\Http\Controllers\CustomerController::class, 'create'])
         ->name('admins.customers.create');
-        
+
     Route::post('/customers', [\App\Http\Controllers\CustomerController::class, 'store'])
         ->name('admins.customers.store');
 
@@ -67,7 +67,7 @@ Route::prefix('admins')->middleware('auth')->group(function () {
         ->name('admins.customers.update');
 
     Route::get('/customers/{id}', [\App\Http\Controllers\CustomerController::class, 'show'])
-        ->name('customers.show');
+        ->name('admins.customers.show');
 
     Route::get('/customers/review/{id}', [\App\Http\Controllers\CustomerController::class, 'showRate'])
         ->name('customers.review');

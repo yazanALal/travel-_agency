@@ -19,7 +19,7 @@ class Customer extends Model
     protected $casts = [
         'name' => 'string',
         'email' => 'string',
-        'gender' => 'enum',
+        'gender' => 'string',
         'phone' => 'string',
     ];
 

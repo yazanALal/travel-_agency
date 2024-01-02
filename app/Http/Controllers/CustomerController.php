@@ -16,7 +16,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        
+
         $customers =  Customer::paginate(4);
         return view('admins.customers.index', ['customers' => $customers]);
     }
@@ -43,6 +43,7 @@ class CustomerController extends Controller
         $validateCustomer = Validator::make(
             $request->all(),
             [
+                'id'=>"integer",
                 'name' => "required|string",
                 'email' => "required|email|unique:customers,email|max:255",
                 'gender' => "required|string",
@@ -69,7 +70,7 @@ class CustomerController extends Controller
     public function show($id)
     {
         $customer = Customer::find($id);
-        return view('admins.customer.show', ['customer' => $customer]);
+        return view('admins.customers.show', ['customer' => $customer]);
     }
 
     /**
@@ -80,9 +81,9 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer, $id)
     {
-        
-        $customers = Customer::all();
-        return view('admins.customers.update', ['customers' => $customers]);
+
+        $customer = Customer::find($id);
+        return view('admins.customers.update', ['customer' => $customer]);
     }
 
     /**
@@ -98,6 +99,7 @@ class CustomerController extends Controller
         $validateCustomer = Validator::make(
             $request->all(),
             [
+                'id'=>"integer|exists:customers,id",
                 'name' => "required|string",
                 'email' => "required|email|unique:customers,email|max:255",
                 'gender' => "required|string",
@@ -111,7 +113,7 @@ class CustomerController extends Controller
             return dd($validateCustomer->errors());
         } else {
             $customer->update($request->all());
-            return Redirect::route('admins.cistomers.index');
+            return Redirect::route('admins.customers.index');
         }
     }
 

@@ -20,7 +20,6 @@
                 <th scope="col">Gender</th>
                 <th scope="col">Phone</th>
                 <th scope="col">show</th>
-                <th scope="col">review</th>
                 <th scope="col">update</th>
                 <th scope="col">delete</th>
             </tr>
@@ -33,7 +32,7 @@
                     <td>{{ $customer->email }}</td>
                     <td>{{ $customer->gender }}</td>
                     <td>{{ $customer->phone }}</td>
-                    <td><a href="{{ route('customers.show', [$customer->id]) }}">
+                    <td><a href="{{ route('admins.customers.show', [$customer->id]) }}">
                             <button type="submit" class="btn btn-outline-secondary">show</button></a>
                     </td>
                     <td><a href="{{ route('admins.customers.edit', [$customer->id]) }}">

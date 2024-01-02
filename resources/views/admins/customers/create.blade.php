@@ -24,12 +24,16 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Gender</label>
-                        <input type="Gender" name="gender" class="form-control" id="exampleFormControlInput1"
-                            placeholder="">
+                        <div>
+                            Male  <input type="radio" name="gender" value="male">
+                        </div>
+                        <div>
+                            Female  <input type="radio" name="gender" value="female">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">phone</label>
-                        <input type="numper" name="phone" class="form-control" id="exampleFormControlInput1"
+                        <input type="text" name="phone" class="form-control" id="exampleFormControlInput1"
                             placeholder="">
                     </div>
 

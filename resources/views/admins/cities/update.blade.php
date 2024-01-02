@@ -10,16 +10,16 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <form method="post" action="{{ route('admins.cities.update', $cities->id) }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('admins.cities.update', $city->id) }}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="exampleFormControlInput1">name</label>
-                        <input type="text" name="name" value="{{ $cities->name }}" class="form-control"
+                        <input type="text" name="name" value="{{ $city->name }}" class="form-control"
                             id="exampleFormControlInput1" placeholder="">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Country</label>
-                        <input type="numper" name="country" value="{{ $cities->country }}" class="form-control"
+                        <input type="numper" name="country" value="{{ $city->country }}" class="form-control"
                             id="exampleFormControlInput1" placeholder="">
                     </div>
                     <div>
