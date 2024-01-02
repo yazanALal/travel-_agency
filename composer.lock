@@ -5923,7 +5923,7 @@
                 "ext-mbstring": "Required for multibyte Unicode string functionality."
             },
             "type": "library",
-            "extra": {
+"extra": {
                 "branch-alias": {
                     "dev-main": "v1.21-dev"
                 }

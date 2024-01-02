@@ -318,6 +318,20 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
+        [
+            'text'        => 'cities',
+            'url'         => '/admins/cities',
+            'icon'        => ' fas fa-fw fa-file',
+            'label'       => 4,
+            'label_color' => 'success',
+        ],
+        [
+            'text'        => 'customers',
+            'url'         => '/admins/customers',
+            'icon'        => ' fas fa-fw fa-file',
+            'label'       => 4,
+            'label_color' => 'success',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
