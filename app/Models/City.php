@@ -9,6 +9,7 @@ class City extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
         'name',
         'country',
@@ -28,4 +29,5 @@ class City extends Model
         public function Tickets():object{
         return $this->hasMany(Ticket::class);
     }
+
 }
