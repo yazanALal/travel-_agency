@@ -31,7 +31,12 @@ class HotelController extends Controller
                 })
                 ->paginate(2);
         } else {
-            $hotels = Hotel::orderBy('id', 'desc')->with('hotel_images')->paginate(4);
+
+            $hotels = Hotel::orderBy('id', 'desc')
+                ->with('hotel_images')
+                ->withAvg('rates', 'star')
+                ->paginate(4);
+            // dd($hotels->toArray());
         }
         return view('admins.hotels.index', ['hotels' => $hotels]);
     }
@@ -58,7 +63,7 @@ class HotelController extends Controller
      */
     public function store(Hotelrequest $request)
     {
-        // dd($request);
+        // dd($request->all());
         // dd($request->file('images'));
         $data = $request->validated();
         // dd($request->file('images'));
@@ -124,6 +129,7 @@ class HotelController extends Controller
      */
     public function update(Hotelrequest $request, $id)
     {
+        $id = route('id');
         $data  = $request->validated();
         // dd($data);
         $hotels = Hotel::with('hotel_images')->findOrFail($id);

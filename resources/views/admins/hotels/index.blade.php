@@ -22,6 +22,67 @@
 @stop
 
 @section('content')
+    <div class="row">
+        @forelse ($hotels as $hotel)
+            <div class="col-md-3 mb-3">
+                <div class="card hotel-card">
+                    <img src="{{ asset('storage/' . $hotel->hotel_images[0]->buf) }}" alt="" class="card-img-top">
+                    <div class="card-body" style="height: 150px;">
+                        <h6 class="card-title font-italic">{{ $hotel->name }}</h6>
+                        <p class="card-text">
+                            <br> <strong>Phone:</strong> {{ $hotel->phone }}<br>
+                            <strong>City:</strong> {{ $hotel->city->name }} <br>
+                            @php
+                                $fullStars = intval($hotel->rates_avg_star);
+                                $halfStar = $hotel->rates_avg_star - $fullStars >= 0.5;
+                            @endphp
+
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= $fullStars)
+                                    <!-- Use a different class for full stars -->
+                                    <i class="fas fa-star text-warning"></i>
+                                @elseif ($halfStar)
+                                    <!-- Use a different class for half stars -->
+                                    <i class="fas fa-star-half-alt text-warning"></i>
+                                    @php $halfStar = false; @endphp
+                                @else
+                                    <!-- Use a different class for empty stars -->
+                                    <i class="far fa-star text-warning"></i>
+                                @endif
+                            @endfor
+
+
+                        </p>
+                    </div>
+
+                    <div class="card-footer">
+                        <a href="{{ route('hotels.show', [$hotel->id]) }}"
+                            class="btn btn-outline-primary btn-sm btn-animate btn-rounded mr-2">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                        <a href="{{ route('hotels.review', [$hotel->id]) }}"
+                            class="btn btn-outline-warning btn-sm btn-animate btn-gradient mr-2">
+                            <i class="fas fa-star"></i>
+                        </a>
+                        <a href="{{ route('admins.hotels.edit', [$hotel->id, $hotel->city_id]) }}"
+                            class="btn btn-outline-info btn-sm btn-animate btn-rounded mr-2">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="{{ route('admins.hotels.delete', $hotel->id) }}"
+                            class="btn btn-outline-danger btn-sm btn-animate btn-rounded mr-2">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        @empty
+            <div class="col-12">
+                <p class="text-center">No Hotels</p>
+            </div>
+        @endforelse
+    </div>
+
+    {{--
 
     <table class="table">
         <thead>
@@ -31,6 +92,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">phone</th>
                 <th scope="col">City</th>
+                <th scope="col">rate</th>
                 <th scope="col">show</th>
                 <th scope="col">review</th>
                 <th scope="col">update</th>
@@ -38,13 +100,18 @@
             </tr>
         </thead>
         <tbody>
-         
+
             @forelse ($hotels as $hotel)
                 <tr>
                     <th scope="row">{{ $hotel->id }}</th>
+                    <td><img src="{{ asset('storage/' . $hotel->hotel_images[0]->buf) }}"
+                            alt=""class="rounded-circle" height="75" width="75">
+                    </td>
                     <td>{{ $hotel->name }}</td>
                     <td>{{ $hotel->phone }}</td>
                     <td>{{ $hotel->city->name }}</td>
+
+                    <td>{{ intval($hotel->rates_avg_star) }}</td>
                     <td><a href="{{ route('hotels.show', [$hotel->id]) }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#0B4213A7"
                                 class="bi bi-book-half" viewBox="0 0 16 16">
@@ -68,10 +135,7 @@
                             </svg>
 
                     </td>
-                    {{-- <td><a href="{{ route('admins.hotels.delete', $hotel->id) }}">
-                            <button type="submit" class="btn btn-outline-dark">Delete</button></a>
-                        </a>
-                    </td> --}}
+
                     <td>
                         <a href="{{ route('admins.hotels.delete', $hotel->id) }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="gray"
@@ -85,16 +149,17 @@
 
 
                 </tr>
-            @empty
+                @empty
                 <tr colspan = "2">
                     <center>NO Hottels</center>
                 </tr><br>
-            @endforelse()
+                @endforelse()
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+        --}}
     {{ $hotels->links() }}
-    {{-- {{ $hotels->appends(['search' => request()->query('search')]) }} --}}
+
 @stop
 
 @section('css')
