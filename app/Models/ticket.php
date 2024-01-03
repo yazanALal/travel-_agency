@@ -13,14 +13,14 @@ class Ticket extends Model
         "company_id",
         'city_id',
         'date_s',
-        'date_s'
+        'date_e'
     ];
 
     protected $casts = [
         "company_id" => 'integer',
         'city_id' => 'integer',
         'date_s' => 'date',
-        'date_s' => 'date',
+        'date_e' => 'date',
     ];
 
     public function city(): object

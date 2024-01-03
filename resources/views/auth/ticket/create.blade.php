@@ -41,17 +41,16 @@
                     @endforeach
                 </select>
             </div>
+            
+            <div class="form-group">
+            <label for="date_s">Start Date:</label>
+            <input type="text" class="form-control" name="date_s" id="date_s" value="{{ old('date_s') }}">
+        </div>
 
-            <div class="form-group mb-3">
-                <label for="date_s">Start Date:</label>
-                <input type="date" class="form-control" name="date_s" value="{{ old('date_s') }}">
-            </div>
-
-            <div class="form-group mb-3">
-                <label for="date_e">End Date:</label>
-                <input type="date" class="form-control" name="date_e" value="{{ old('date_e') }}">
-            </div>
-
+        <div class="form-group">
+            <label for="date_e">End Date:</label>
+            <input type="text" class="form-control" name="date_e" id="date_e" value="{{ old('date_e') }}">
+        </div>
             <button type="submit" class="btn btn-primary">Create Ticket</button>
         </form>
 
@@ -65,6 +64,14 @@
 
 @section('js')
     <script>
-        console.log('HI!');
+        flatpickr("#date_s", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+        });
+
+        flatpickr("#date_e", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+        });
     </script>
-@endsection
+@stop

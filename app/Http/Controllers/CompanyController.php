@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
-
-
 class CompanyController extends Controller
 {
     /**
@@ -46,10 +43,9 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(company $company, Request $request)
+    public function store(Request $request , company $company)
     {
         //
-
         if ($request->isMethod('POST')) {
             $validate = Validator::make($request->all(), [
                 'name' => 'required|string|max:30',
@@ -80,21 +76,21 @@ class CompanyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\company  $company
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function Fshow(company $company, $id)
+    public function show($id)
     {
         //
         $company = Company::find($id);
+        return view('auth.company.show', ['company' => $company]);        
         
-        return view('auth.company.show', ['company' => $company]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\company  $company
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -108,7 +104,7 @@ class CompanyController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\company  $company
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -116,24 +112,14 @@ class CompanyController extends Controller
         //
         $validate = Validator::make($request->all(), [
             'name' => 'required|string|max:30',
-            'phone' => ['required', 'regex:/^(?:\+963|09)[0-9]+$/', 'min:10', 'max:14', 'numeric'],
+            'phone' => ['required', 'regex:/^(?:\+963|09)[0-9]+$/', 'digits_between:10,14', 'numeric'],
         ]);
         if ($validate->fails()) {
-            return redirect()->route('company.edit')->withErrors($validate)->withInput();
+            return redirect()->route('company.edit', ['id' => $id])->withErrors($validate)->withInput();
             // dd($validate->errors()->all());
         }
         if ($validate->fails()) {
             return redirect()->route('company.edit')->withErrors($validate)->withInput();
-        }
-        $existingCompany = Company::where('phone', $request->phone)->first();
-
-        if ($existingCompany) {
-            return redirect()->route('company.edit')->withErrors(['phone' => 'Phone number already exists']);
-        }
-        $existingCompany = Company::where('name', $request->name)->first();
-
-        if ($existingCompany) {
-            return redirect()->route('company.edit')->withErrors(['name' => 'Company name already exists']);
         }
         if ($request->isMethod('POST')) {
             $company = company::find($id);
@@ -141,6 +127,7 @@ class CompanyController extends Controller
             $company->phone = $request->phone;
             $company->save();
 
+            // return $this->show($company, $id);
             return redirect()->route('company.show', ['id' => $company->id]);
         }
     }
@@ -148,10 +135,10 @@ class CompanyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\company  $company
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(company $company, $id)
+    public function destroy($id)
     {
         //
         $company = company::find($id);

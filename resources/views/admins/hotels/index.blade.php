@@ -42,9 +42,6 @@
             @forelse ($hotels as $hotel)
                 <tr>
                     <th scope="row">{{ $hotel->id }}</th>
-                    <td><img src="{{ asset('storage/' . $hotel->hotel_images[0]->buf) }}"
-                            alt=""class="rounded-circle" height="75" width="75">
-                    </td>
                     <td>{{ $hotel->name }}</td>
                     <td>{{ $hotel->phone }}</td>
                     <td>{{ $hotel->city->name }}</td>
