@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\City;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+
 
 class CityController extends Controller
 {
@@ -16,8 +18,10 @@ class CityController extends Controller
      */
     public function index()
     {
+
         $cities =  City::paginate(4);
         return view('admins.cities.index', ['cities' => $cities]);
+
     }
 
     /**
@@ -27,8 +31,10 @@ class CityController extends Controller
      */
     public function create()
     {
+
         $cities = City::all();
         return view('admins.cities.create', compact('cities'));
+
     }
 
     /**
@@ -39,6 +45,7 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
+
         $validateCity = Validator::make(
             $request->all(),
             [
@@ -54,11 +61,13 @@ class CityController extends Controller
             //PRG
             return Redirect::route('admins.cities.index');
         }
+
     }
 
     /**
      * Display the specified resource.
      *
+
      * @param  \App\Models\City  $city
      * @return \Illuminate\Http\Response
      */
@@ -66,11 +75,13 @@ class CityController extends Controller
     {
         $city = City::find($id);
         return view('admins.cities.show', ['city' => $city]);
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
+
      * @param  \App\Models\City  $city
      * @return \Illuminate\Http\Response
      */
@@ -78,12 +89,14 @@ class CityController extends Controller
     {
         $city = City::find($id);
         return view('admins.cities.update', ['city' => $city]);
+
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+
      * @param  \App\Models\City  $city
      * @return \Illuminate\Http\Response
      */
@@ -104,11 +117,13 @@ class CityController extends Controller
             $cities->update($request->all());
             return Redirect::route('admins.cities.index');
         }
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
+
      * @param  \App\Models\City  $city
      * @return \Illuminate\Http\Response
      */
@@ -117,5 +132,6 @@ class CityController extends Controller
         City::find($id);
         City::destroy($id);
         return Redirect::route('admins.cities.index');
+
     }
 }

@@ -318,6 +318,7 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
+        
         [
             'text'        => 'review',
             'url'         => '/admins/rates',
