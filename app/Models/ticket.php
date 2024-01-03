@@ -5,32 +5,31 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ticket extends Model
+class Ticket extends Model
 {
     use HasFactory;
+
     protected $fillable = [
+        "company_id",
         'city_id',
-        'company_id',
         'date_s',
-        'date_e',
-    ];
-    protected $casts = [
-        'city_id' => 'integer',
-        'company_id' => 'integer',
-        'date_s' => 'date',
-        'date_e' => 'date',
+        'date_s'
     ];
 
-    public function company(): object
-    {
-        return $this->belongsTo(company::class);
-    }
+    protected $casts = [
+        "company_id" => 'integer',
+        'city_id' => 'integer',
+        'date_s' => 'date',
+        'date_s' => 'date',
+    ];
+
     public function city(): object
     {
-        return $this->belongsTo(city::class);
+        return $this->belongsTo(City::class);
     }
-    public function booking(): object
+    
+   public function company(): object
     {
-        return $this->hasMany(booking::class);
+        return $this->belongsTo(Company::class);
     }
 }
